@@ -22,6 +22,7 @@ interface PayloadToken extends JWTPayload {
   usuarioId: string;
   rol: Identidad['rol'];
   sucursalId: string;
+  refreshId: string; 
 }
 
 function clave(secreto: string): Uint8Array {
@@ -43,6 +44,7 @@ async function firmar(
     usuarioId: identidad.usuarioId,
     rol: identidad.rol,
     sucursalId: identidad.sucursalId,
+    refreshId: identidad.refreshId,
   })
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
@@ -75,6 +77,7 @@ export async function verificar(
       usuarioId: p.usuarioId,
       rol: p.rol,
       sucursalId: p.sucursalId,
+      refreshId: p.refreshId,
     };
   } catch {
     return null; // firma inválida, expirado o malformado

@@ -8,15 +8,15 @@ import { puedeResolverSolicitud, puedeVerSolicitud } from '@/lib/authz';
 import { IDS, SUCURSAL_A, SUCURSAL_B, usuariosDemo, solicitudesDemo } from '@/lib/fixtures';
 import type { Identidad, Solicitud } from '@/lib/types';
 
-function identidad(usuarioId: string, rol: Identidad['rol'], sucursalId: string): Identidad {
-  return { sesionId: 'sesion-test', usuarioId, rol, sucursalId };
+function identidad(usuarioId: string, rol: Identidad['rol'], sucursalId: string, refreshId: string): Identidad {
+  return { sesionId: 'sesion-test', usuarioId, rol, sucursalId, refreshId };
 }
 
-const ANALISTA_A = identidad(IDS.analistaA, 'ANALISTA', SUCURSAL_A);
-const APROBADOR_A = identidad(IDS.aprobadorA, 'APROBADOR', SUCURSAL_A);
-const APROBADOR_A2 = identidad(IDS.aprobadorA2, 'APROBADOR', SUCURSAL_A);
-const AUDITOR = identidad(IDS.auditor, 'AUDITOR', SUCURSAL_A);
-const ANALISTA_B = identidad(IDS.analistaB, 'ANALISTA', SUCURSAL_B);
+const ANALISTA_A = identidad(IDS.analistaA, 'ANALISTA', SUCURSAL_A,'refresh-test');
+const APROBADOR_A = identidad(IDS.aprobadorA, 'APROBADOR', SUCURSAL_A,'refresh-test');
+const APROBADOR_A2 = identidad(IDS.aprobadorA2, 'APROBADOR', SUCURSAL_A,'refresh-test');
+const AUDITOR = identidad(IDS.auditor, 'AUDITOR', SUCURSAL_A,'refresh-test');
+const ANALISTA_B = identidad(IDS.analistaB, 'ANALISTA', SUCURSAL_B,'refresh-test');
 
 let repo: RepositorioMemoria;
 beforeEach(() => {
@@ -29,7 +29,7 @@ describe('puedeResolverSolicitud — matriz de decisión pura', () => {
   const casos: Array<{ nombre: string; actor: Identidad; esperado: boolean }> = [
     { nombre: 'analista de la misma sucursal NO puede aprobar', actor: ANALISTA_A, esperado: false },
     { nombre: 'aprobador de la misma sucursal (no creador) SÍ puede', actor: APROBADOR_A, esperado: true },
-    { nombre: 'aprobador de OTRA sucursal NO puede', actor: identidad('x', 'APROBADOR', SUCURSAL_B), esperado: false },
+    { nombre: 'aprobador de OTRA sucursal NO puede', actor: identidad('x', 'APROBADOR', SUCURSAL_B,'refresh-test'), esperado: false },
     { nombre: 'auditor NO puede aprobar', actor: AUDITOR, esperado: false },
   ];
 
@@ -67,7 +67,7 @@ describe('aprobarSolicitud — verifica el EFECTO en el repositorio', () => {
   });
 
   it('aprobador de otra sucursal denegado y el estado no cambia', async () => {
-    const r = await aprobarSolicitud(repo, identidad('x', 'APROBADOR', SUCURSAL_B), { id: IDS.solicitudA });
+    const r = await aprobarSolicitud(repo, identidad('x', 'APROBADOR', SUCURSAL_B,'refresh-test'), { id: IDS.solicitudA });
     expect(r.ok).toBe(false);
     expect((await repo.buscarSolicitud(IDS.solicitudA))?.estado).toBe('PENDIENTE');
     const auditoria = await repo.listarAuditoria();

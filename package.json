@@ -16,7 +16,8 @@
     "db:seed": "tsx db/seed.ts",
     "grade:http": "node grading/http-smoke.mjs",
     "grade:e2e": "playwright test --config grading/playwright.grading.config.ts",
-    "grade": "node grading/grade.mjs"
+    "grade": "node grading/grade.mjs",
+    "test:p1": "vitest run tests/unit"
   },
   "dependencies": {
     "@hookform/resolvers": "5.7.1",
