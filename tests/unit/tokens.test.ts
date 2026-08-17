@@ -13,8 +13,7 @@ const ID: Identidad = {
   sesionId: 's-1',
   usuarioId: 'u-1',
   rol: 'ANALISTA',
-  sucursalId: 'suc-central',
-  refreshId: 'r-1',
+  sucursalId: 'suc-central'
 };
 
 describe('tokens', () => {
