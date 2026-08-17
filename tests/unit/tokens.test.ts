@@ -14,7 +14,6 @@ const ID: Identidad = {
   usuarioId: 'u-1',
   rol: 'ANALISTA',
   sucursalId: 'suc-central',
-  refreshId: 'r-1',
 };
 
 describe('tokens', () => {

@@ -26,7 +26,7 @@ export async function iniciarSesion(_prev: unknown, formData: FormData): Promise
   // Rotación: sesión NUEVA en cada login (previene fijación de sesión).
   const sesion = await repo().crearSesion(usuario.id);
   await establecerSesion({
-    sesionId: sesion.id, usuarioId: usuario.id, rol: usuario.rol, sucursalId: usuario.sucursalId, refreshId: sesion.refreshActual
+    sesionId: sesion.id, usuarioId: usuario.id, rol: usuario.rol, sucursalId: usuario.sucursalId
   });
   await repo().registrarAuditoria({
     evento: 'LOGIN_EXITOSO', actorId: usuario.id,

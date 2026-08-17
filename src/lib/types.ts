@@ -44,7 +44,6 @@ export interface Identidad {
   usuarioId: string;
   rol: Rol;
   sucursalId: string;
-  refreshId: string;
 }
 
 export type EventoAuditoria =
