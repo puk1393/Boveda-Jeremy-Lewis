@@ -5,7 +5,7 @@ si no podes apuntar a una linea concreta, esa regla esta regada por el codigo en
 
 | Operacion | ANALISTA | APROBADOR | AUDITOR | Condicion ABAC | authz.ts |
 |---|---|---|---|---|---|
-| Ver solicitud | Solo su sucursal | Solo su sucursal | Todas | s.sucursalId === actor.sucursalId | L17 |
+| Ver solicitud | Solo su sucursal | Solo su sucursal | Todas | s.sucursalId === actor.sucursalId, salvo Auditor | L17 |
 | Crear solicitud | Si | No | No | actor.rol === 'ANALISTA' | L26 |
 | Resolver solicitud | No | Si | No | Misma sucursal + estado PENDIENTE + aprobador no es quien la creo | L37 |
 | Ver bitacora |No | No | Si | | L54 |
