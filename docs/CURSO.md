@@ -7,7 +7,7 @@ nunca reemplazando un tema.
 
 | # | Tema oficial | Dónde vive en el repo | Profundidad añadida |
 |---|--------------|------------------------|---------------------|
-| 1 | Fundamentos de autenticación moderna (JWT, **access vs refresh**, roles/claims) | `src/lib/tokens.ts`, `tests/unit/tokens.test.ts` | Sesión revocable respaldada en base; algoritmo fijado explícitamente |
+| 1 | Fundamentos de autenticación moderna (JWT, **access vs refresh**, roles/claims) | `src/lib/tokens.ts`, `tests/unit/practica-1/base/tokens.test.ts` | Sesión revocable respaldada en base; algoritmo fijado explícitamente |
 | 2 | Almacenamiento seguro (cookies httpOnly, riesgos de localStorage) | `src/lib/session.ts` (cookies httpOnly, SameSite) | Prefijo `__Host-` para producción; refresh en cookie aparte |
 | 3 | Vulnerabilidades comunes (XSS, CSRF, OWASP frontend) | `src/lib/sanitize.ts`, `middleware.ts` (CSP) | CSP con nonce + `strict-dynamic`; escapado de salida vs sanitización al escribir |
 | 4 | Implementación práctica (login, sesión, logout) | `src/app/login/`, `src/app/logout/` | Mensaje de error uniforme; rotación de sesión anti-fijación |
