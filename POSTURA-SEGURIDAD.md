@@ -17,7 +17,7 @@ Una fila por control. En "Como se verifica" va el comando exacto, no una idea.
 | 3 | Acceso a datos solo tras el repositorio | src/lib/db.ts, src/lib/repository.ts | npm run test:p3 | Cubierto |
 | 4 | `ResultadoAccion` uniforme, sin filtrar detalle | src/lib/errors.ts, acciones de servidor | npm run test:p3 | Cubierto |
 | 5 | `error.tsx` no renderiza `error.message` | src/app/error.tsx | npm run test:p3 | Cubierto |
-| 6 | Allowlist anti-SSRF en fetch de servidor | archivo donde está validarDestino | `npx vitest run tests/unit/practica-3/extra/outbound.test.ts` | Cubierto |
+| 6 | Allowlist anti-SSRF en fetch de servidor | src/lib/outbound.ts | `npx vitest run tests/unit/practica-3/extra/outbound.test.ts` | Cubierto |
 | 7 | Autorizacion pegada al dato (sin IDOR) | src/lib/authz.ts + rutas de solicitudes | `npm run e2e` | Cubierto |
 | 8 | Doble control (el creador no aprueba) | src/lib/authz.ts | `npm run test:authz` | Cubierto |
 | 9 | Cookie de sesion endurecida | src/lib/session.ts | `npm run e2e` | Cubierto |
@@ -186,4 +186,4 @@ Agujero 2 — Métricas: falló la lista, porque se agregó metrics.interno, hac
 1.	¿Qué casos cubre el archivo que su versión no cubría?
 R/ Cubre localhost, subdominios .localhost y loopback IPv6 (::1). Además, valida explícitamente que una IPv4 sea válida antes de revisar sus rangos.
 2.	¿En qué posición está la llamada, y qué pasaría si estuviera una línea más abajo?
-R/ La comprobación de esHostInterno() está antes de consultar la allowlist. Si estuviera una línea más abajo, un host interno que haya sido agregado accidentalmente a HOSTS_PERMITIDOS podría pasar la allowlist y ser permitido antes de llegar a la comprobación de seguridad.
+R/ La comprobación de esHostInterno() está antes de consultar la allowlist. Si estuviera una línea más abajo, un host interno que haya sido agregado accidentalmente a HOSTS_PERMITIDOS podría pasar la allowlist y ser permitido antes de llegar a la comprobación de seguridad.gt
