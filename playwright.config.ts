@@ -15,7 +15,7 @@ export default defineConfig({
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
   webServer: {
     // Siembra una base de prueba dedicada y arranca el server ya construido.
-    command: 'BOVEDA_DB=e2e.db npx tsx db/seed.ts && BOVEDA_DB=e2e.db PORT=3100 npx next start -p 3100',
+    command: 'cmd /c "set BOVEDA_DB=e2e.db&& npx tsx db/seed.ts && set BOVEDA_DB=e2e.db&& set PORT=3100&& npx next start -p 3100"',
     url: 'http://localhost:3100/login',
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,

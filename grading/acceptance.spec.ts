@@ -91,7 +91,7 @@ test.describe('Criterio 3 — estados y retroalimentación', () => {
     await page.goto('/auditoria'); // debería mandar a no-autorizado
     const enNoAutorizado = /\/no-autorizado/.test(page.url());
     if (enNoAutorizado) {
-      await expect(page.getByRole('alert')).toBeVisible();
+      await expect(page.locator('.contenedor.estado[role="alert"]')).toBeVisible();
     }
   });
 
